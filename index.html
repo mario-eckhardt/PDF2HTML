@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to HTML Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    <!-- Tesseract.js -->
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+    <!-- JSZip -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>PDF to HTML Converter</h1>
+            <p>Convert your PDFs to interactive HTML. Supports scanned documents via OCR.</p>
+        </header>
+
+        <main>
+            <div id="upload-area" class="upload-area">
+                <div class="upload-icon">📄</div>
+                <h2>Drag & Drop PDF here</h2>
+                <p>or click to select file</p>
+                <input type="file" id="file-input" accept=".pdf" hidden>
+            </div>
+
+            <div id="status-container" class="status-container hidden">
+                <div class="spinner"></div>
+            </div>
+            <div id="preview-content" class="preview-content">
+                <!-- Converted HTML will appear here -->
+            </div>
+    </div>
+    </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
