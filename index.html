@@ -34,13 +34,65 @@
 
             <div id="status-container" class="status-container hidden">
                 <div class="spinner"></div>
-                <p id="status-text">Ready</p>
+                <p id="status-text">Processing...</p>
+                <div id="progress-bar-container" class="hidden">
+                    <div id="progress-bar"></div>
+                </div>
             </div>
-            <div id="preview-content" class="preview-content">
-                <!-- Converted HTML will appear here -->
+
+            <div id="editor-container" class="editor-container hidden">
+                <div class="editor-layout">
+                    <div class="editor-main">
+                        <div class="toolbar">
+                            <span class="instruction">Review Regions: Green = Text, Blue = Image. Click to toggle. Drag
+                                to resize. Right-click to switch type.</span>
+                            <button id="generate-btn" class="btn primary">Generate HTML</button>
+                        </div>
+                        <div id="editor-content" class="editor-content">
+                            <!-- Canvas and Overlays will go here -->
+                        </div>
+                    </div>
+
+                    <!-- New Style Sidebar -->
+                    <div id="style-sidebar" class="style-sidebar hidden">
+                        <h3>Text Style</h3>
+                        <div class="form-group">
+                            <label>Font Family</label>
+                            <select id="font-family-select">
+                                <option value="Arial, sans-serif">Arial</option>
+                                <option value="'Times New Roman', serif">Times New Roman</option>
+                                <option value="'Courier New', monospace">Courier New</option>
+                                <option value="Georgia, serif">Georgia</option>
+                                <option value="Verdana, sans-serif">Verdana</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Font Size (px)</label>
+                            <input type="number" id="font-size-input" min="8" max="72" value="16">
+                        </div>
+                        <div class="form-group">
+                            <label>Alignment</label>
+                            <div class="btn-group">
+                                <button class="btn-icon" data-align="left" title="Left">L</button>
+                                <button class="btn-icon" data-align="center" title="Center">C</button>
+                                <button class="btn-icon" data-align="right" title="Right">R</button>
+                            </div>
+                        </div>
+                        <button id="apply-style-btn" class="btn secondary">Apply to All Text</button>
+                    </div>
+                </div>
             </div>
-    </div>
-    </main>
+
+            <div id="result-container" class="result-container hidden">
+                <div class="toolbar">
+                    <button id="download-btn" class="btn primary">Download HTML</button>
+                    <button id="reset-btn" class="btn secondary">Convert Another</button>
+                </div>
+                <div id="preview-content" class="preview-content">
+                    <!-- Converted HTML will appear here -->
+                </div>
+            </div>
+        </main>
     </div>
     <script src="app.js"></script>
 </body>

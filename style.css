@@ -1,9 +1,12 @@
 :root {
     --primary-color: #4a90e2;
-    --secondary-color: #f5f6fa;
-    --text-color: #2c3e50;
-    --border-color: #dcdde1;
-    --success-color: #2ecc71;
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --border-color: #dee2e6;
+    --text-color: #333;
+    --success-color: #28a745;
+    --box-text-color: rgba(40, 167, 69, 0.3);
+    --box-image-color: rgba(0, 123, 255, 0.3);
 }
 
 * {
@@ -16,34 +19,49 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: #f0f2f5;
-    padding: 2rem;
+    background-color: var(--background-color);
+    height: 100vh;
+    overflow: hidden;
+    /* App-like feel */
 }
 
 .container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 header {
-    text-align: center;
-    margin-bottom: 2rem;
+    background-color: white;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
 }
 
-h1 {
+header h1 {
+    font-size: 1.5rem;
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
 }
 
+main {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Upload Area */
 .upload-area {
+    margin: 2rem auto;
+    width: 600px;
+    padding: 4rem 2rem;
     border: 3px dashed var(--border-color);
     border-radius: 12px;
-    padding: 3rem;
     text-align: center;
+    background: white;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -51,21 +69,21 @@ h1 {
 .upload-area:hover,
 .upload-area.drag-over {
     border-color: var(--primary-color);
-    background-color: rgba(74, 144, 226, 0.05);
+    background: #eef5ff;
 }
 
 .upload-icon {
-    font-size: 3rem;
+    font-size: 4rem;
     margin-bottom: 1rem;
 }
 
-.hidden {
-    display: none !important;
-}
-
+/* Status & Loading */
 .status-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    padding: 2rem;
 }
 
 .spinner {
@@ -89,78 +107,64 @@ h1 {
 }
 
 #progress-bar-container {
-    width: 100%;
-    background-color: #e0e0e0;
+    width: 300px;
+    height: 8px;
+    background: #e9ecef;
     border-radius: 4px;
     margin-top: 1rem;
-    height: 8px;
     overflow: hidden;
 }
 
 #progress-bar {
     width: 0%;
     height: 100%;
-    background-color: var(--success-color);
+    background: var(--primary-color);
     transition: width 0.3s ease;
 }
 
-.result-container {
-    margin-top: 2rem;
+/* Editor Layout */
+.editor-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.editor-layout {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.editor-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
 }
 
 .toolbar {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    justify-content: flex-end;
-}
-
-.btn {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: opacity 0.2s;
-}
-
-.btn:hover {
-    opacity: 0.9;
-}
-
-.btn.primary {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.btn.secondary {
-    background-color: var(--border-color);
-    color: var(--text-color);
-}
-
-.preview-content {
-    border: 1px solid var(--border-color);
-    padding: 2rem;
-    border-radius: 8px;
     background: white;
-    min-height: 200px;
-    max-height: 600px;
-    overflow-y: auto;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
 }
 
-/* Editor Styles */
-.editor-container {
-    margin-top: 2rem;
+.instruction {
+    font-size: 0.9rem;
+    color: #666;
 }
 
 .editor-content {
-    position: relative;
-    border: 1px solid var(--border-color);
-    background: #525659;
-    /* Dark background for PDF viewer feel */
-    padding: 2rem;
+    flex: 1;
     overflow: auto;
-    max-height: 800px;
+    background: #525659;
+    /* PDF Viewer Dark Gray */
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -169,53 +173,131 @@ h1 {
 
 .editor-page {
     position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.region-box {
-    position: absolute;
-    border: 2px solid;
-    background-color: rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    box-sizing: border-box;
+/* Sidebar Styles */
+.style-sidebar {
+    width: 280px;
+    background: white;
+    border-left: 1px solid var(--border-color);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+    flex-shrink: 0;
     z-index: 10;
 }
 
+.style-sidebar.hidden {
+    display: none;
+    /* Or use transform for animation */
+}
+
+.style-sidebar h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-group select,
+.form-group input {
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.btn-group {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.btn-icon {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    background: white;
+    cursor: pointer;
+    border-right: 1px solid #ddd;
+    font-weight: bold;
+    color: #555;
+    transition: background 0.2s;
+}
+
+.btn-icon:last-child {
+    border-right: none;
+}
+
+.btn-icon:hover {
+    background: #f1f1f1;
+}
+
+.btn-icon.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Region Boxes */
+.region-box {
+    position: absolute;
+    border: 2px solid;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background 0.2s;
+}
+
 .region-box:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    z-index: 20;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .region-box.text {
-    border-color: #2ecc71;
-    /* Green */
+    border-color: #28a745;
+    background: var(--box-text-color);
 }
 
 .region-box.image {
-    border-color: #3498db;
-    /* Blue */
+    border-color: #007bff;
+    background: var(--box-image-color);
 }
 
 .region-box.inactive {
-    border-color: #95a5a6;
-    opacity: 0.3;
-    border-style: dashed;
+    background: transparent;
+    border-color: #ccc;
+    opacity: 0.5;
 }
 
 /* Resize Handles */
 .resize-handle {
-    position: absolute;
     width: 8px;
     height: 8px;
     background: white;
     border: 1px solid #333;
+    position: absolute;
     display: none;
-    /* Show on hover/active */
+    /* Hidden by default */
 }
 
 .region-box:hover .resize-handle,
-.region-box.resizing .resize-handle {
+.region-box.active .resize-handle {
     display: block;
 }
 
@@ -243,15 +325,57 @@ h1 {
     cursor: se-resize;
 }
 
-/* Generated HTML Styles */
+/* Buttons */
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn.primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn.secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+/* Result Container */
+.result-container {
+    flex: 1;
+    padding: 2rem;
+    overflow: auto;
+    background: white;
+}
+
+.preview-content {
+    max-width: 800px;
+    margin: 2rem auto;
+    border: 1px solid #eee;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
 .pdf-page {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px dashed #ccc;
 }
 
-.pdf-image {
+.pdf-page img {
     max-width: 100%;
-    height: auto;
-    margin: 1rem 0;
 }
